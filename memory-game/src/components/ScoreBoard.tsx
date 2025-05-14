@@ -5,7 +5,7 @@ import { ANIMATIONS } from "@/constants";
 
 type ScoreBoardProps = {
   moves: number;
-  time: number;
+  time: string;
   onRestart: () => void;
 };
 

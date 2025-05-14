@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -11,19 +10,16 @@ const CARD_STYLES = {
 
 type CardProps = {
   emoji: string;
+  onClick: () => void;
+  isFlipped: boolean;
+  isMatched: boolean;
 };
 
-function Card({ emoji }: CardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
-
+function Card({ emoji, isFlipped, isMatched, onClick }: CardProps) {
   return (
     <button
-      className="xs:h-20 xs:w-20 relative h-16 w-16 cursor-pointer sm:h-24 sm:w-24"
-      onClick={handleClick}
+      className="relative h-16 w-16 cursor-pointer xs:h-20 xs:w-20 sm:h-24 sm:w-24"
+      onClick={onClick}
     >
       {/* div do 3D */}
       <div
@@ -38,7 +34,15 @@ function Card({ emoji }: CardProps) {
         </div>
 
         {/* Card front */}
-        <div className={cn(CARD_STYLES.base, CARD_STYLES.front)}>{emoji}</div>
+        <div
+          className={cn(
+            CARD_STYLES.base,
+            CARD_STYLES.front,
+            isMatched && "bg-gray-300",
+          )}
+        >
+          {emoji}
+        </div>
       </div>
     </button>
   );
